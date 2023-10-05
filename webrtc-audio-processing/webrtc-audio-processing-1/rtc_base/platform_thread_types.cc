@@ -17,6 +17,7 @@
 
 #if defined(WEBRTC_FREEBSD)
 #include <pthread.h>
+#include <pthread_np.h>
 #include <sys/thr.h>
 #endif
 
