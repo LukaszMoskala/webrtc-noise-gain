@@ -361,7 +361,7 @@ have_neon = True
 have_avx2 = False  # disabled for older CPUs
 
 
-if system == "linux" or system == "freebsd":
+if system == "linux":
     system_cflags += ["-DWEBRTC_LINUX", "-DWEBRTC_THREAD_RR", "-DWEBRTC_POSIX"]
 elif system == "darwin":
     system_cflags += ["-DWEBRTC_MAC", "-DWEBRTC_POSIX"]
@@ -370,6 +370,8 @@ elif system == "darwin":
 
     # Not using std::optional
     absl_sources = ["absl/types/bad_optional_access.cc"]
+elif system == "freebsd":
+    system_cflags += ["-DWEBRTC_FREEBSD", "-DWEBRTC_POSIX", "-I/usr/local/include", "-L/usr/local/lib"]
 elif system == "windows":
     system_cflags += [
         "-DWEBRTC_WIN",
