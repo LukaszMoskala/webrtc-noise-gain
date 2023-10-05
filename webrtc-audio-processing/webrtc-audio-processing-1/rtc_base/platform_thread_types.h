@@ -39,11 +39,7 @@ typedef DWORD PlatformThreadRef;
 typedef zx_handle_t PlatformThreadId;
 typedef zx_handle_t PlatformThreadRef;
 #elif defined(WEBRTC_POSIX)
-#if defined(WEBRTC_FREEBSD)
-typedef pthread_t PlatformThreadId;
-#else
 typedef pid_t PlatformThreadId;
-#endif
 typedef pthread_t PlatformThreadRef;
 #endif
 

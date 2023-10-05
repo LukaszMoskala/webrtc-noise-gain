@@ -41,6 +41,10 @@ PlatformThreadId CurrentThreadId() {
   return syscall(__NR_gettid);
 #elif defined(__EMSCRIPTEN__)
   return static_cast<PlatformThreadId>(pthread_self());
+#elif defined(WEBRTC_FREEBSD)
+  pthread_t threadId = pthread_self();
+  long uniqueId = pthread_getunique_np(&threadId);
+  return getpid() * 100 + uniqueId;
 #else
   // Default implementation for nacl and solaris.
   return reinterpret_cast<PlatformThreadId>(pthread_self());
