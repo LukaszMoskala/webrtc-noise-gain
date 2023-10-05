@@ -15,6 +15,11 @@
 #include <sys/syscall.h>
 #endif
 
+#if defined(WEBRTC_FREEBSD)
+#include <pthread.h>
+#include <sys/thr.h>
+#endif
+
 #if defined(WEBRTC_WIN)
 #include "rtc_base/arraysize.h"
 
@@ -42,9 +47,7 @@ PlatformThreadId CurrentThreadId() {
 #elif defined(__EMSCRIPTEN__)
   return static_cast<PlatformThreadId>(pthread_self());
 #elif defined(WEBRTC_FREEBSD)
-  pthread_t threadId = pthread_self();
-  long uniqueId = pthread_getunique_np(&threadId);
-  return getpid() * 100 + uniqueId;
+  return pthread_getunique_np(pthread_self());
 #else
   // Default implementation for nacl and solaris.
   return reinterpret_cast<PlatformThreadId>(pthread_self());
