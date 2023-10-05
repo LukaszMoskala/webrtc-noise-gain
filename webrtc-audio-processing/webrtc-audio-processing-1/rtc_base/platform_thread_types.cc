@@ -47,7 +47,7 @@ PlatformThreadId CurrentThreadId() {
 #elif defined(__EMSCRIPTEN__)
   return static_cast<PlatformThreadId>(pthread_self());
 #elif defined(WEBRTC_FREEBSD)
-  return pthread_getunique_np(pthread_self());
+  return pthread_getthreadid_np(pthread_self());
 #else
   // Default implementation for nacl and solaris.
   return reinterpret_cast<PlatformThreadId>(pthread_self());
