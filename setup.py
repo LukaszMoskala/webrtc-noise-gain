@@ -361,7 +361,7 @@ have_neon = True
 have_avx2 = False  # disabled for older CPUs
 
 
-if system == "linux":
+if system == "linux" || system == "freebsd";:
     system_cflags += ["-DWEBRTC_LINUX", "-DWEBRTC_THREAD_RR", "-DWEBRTC_POSIX"]
 elif system == "darwin":
     system_cflags += ["-DWEBRTC_MAC", "-DWEBRTC_POSIX"]
